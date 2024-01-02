@@ -6,16 +6,23 @@ final class TripsViewController: UITableViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
+        TripFunctions.read { [weak self] in
+            self?.trips = Data.trips
+        }
+    }
+    
+    private func setupTableView() {
         tableView.register(
             TripCell.self,
             forCellReuseIdentifier: TripCell.identifier
         )
         tableView.separatorStyle = .none
-        TripFunctions.read { [weak self] in
-            self?.trips = Data.trips
-        }
     }
 
+}
+// MARK: - UITableViewDataSource
+extension TripsViewController {
     override func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int

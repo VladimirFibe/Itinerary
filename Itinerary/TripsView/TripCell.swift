@@ -5,10 +5,7 @@ final class TripCell: UITableViewCell {
     
     private let cardView: UIView = {
         $0.backgroundColor = .darkGray
-        $0.layer.cornerRadius = 10
-        $0.layer.shadowOpacity = 1
-        $0.layer.shadowOffset = .zero
-        $0.layer.shadowColor = UIColor.darkGray.cgColor
+        $0.addShadowAndRoundedCorners()
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UIView())
