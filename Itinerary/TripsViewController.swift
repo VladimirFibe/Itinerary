@@ -6,19 +6,32 @@ final class TripsViewController: UITableViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(
+            TripCell.self,
+            forCellReuseIdentifier: TripCell.identifier
+        )
+        tableView.separatorStyle = .none
         TripFunctions.read { [weak self] in
             self?.trips = Data.trips
         }
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
         trips.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = trips[indexPath.row].title
+    override func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: TripCell.identifier,
+            for: indexPath
+        ) as? TripCell else { fatalError() }
+        cell.configure(with: trips[indexPath.row])
         return cell
     }
 }
