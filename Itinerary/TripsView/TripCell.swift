@@ -4,14 +4,14 @@ final class TripCell: UITableViewCell {
     static let identifier = "TripCell"
     
     private let cardView: UIView = {
-        $0.backgroundColor = .darkGray
+        $0.backgroundColor = Theme.accent
         $0.addShadowAndRoundedCorners()
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UIView())
 
     private let titleLabel: UILabel = {
-        $0.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        $0.font = UIFont(name: Theme.mainFontName, size: 20)
         $0.textAlignment = .center
         $0.textColor = .white
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -33,6 +33,7 @@ final class TripCell: UITableViewCell {
     }
 
     private func setupViews() {
+        backgroundColor = .clear
         contentView.addSubview(cardView)
         cardView.addSubview(titleLabel)
     }

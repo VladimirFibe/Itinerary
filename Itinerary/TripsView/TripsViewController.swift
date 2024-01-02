@@ -7,6 +7,7 @@ final class TripsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        view.backgroundColor = Theme.background
         TripFunctions.read { [weak self] in
             self?.trips = Data.trips
         }
