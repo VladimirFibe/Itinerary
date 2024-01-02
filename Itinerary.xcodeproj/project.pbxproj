@@ -13,6 +13,7 @@
 		02C33E2C2B43E08B00D21A59 /* TripModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C33E2B2B43E08B00D21A59 /* TripModel.swift */; };
 		02C33E2E2B43E09900D21A59 /* TripFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C33E2D2B43E09900D21A59 /* TripFunctions.swift */; };
 		02C33E302B43E3E300D21A59 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C33E2F2B43E3E300D21A59 /* Data.swift */; };
+		02C33E332B43EBF400D21A59 /* TripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C33E322B43EBF400D21A59 /* TripsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		02C33E2B2B43E08B00D21A59 /* TripModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripModel.swift; sourceTree = "<group>"; };
 		02C33E2D2B43E09900D21A59 /* TripFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripFunctions.swift; sourceTree = "<group>"; };
 		02C33E2F2B43E3E300D21A59 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		02C33E322B43EBF400D21A59 /* TripsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				02C212AC2B43264600628732 /* AppDelegate.swift */,
+				02C33E322B43EBF400D21A59 /* TripsViewController.swift */,
 				02C33E312B43E41400D21A59 /* Model */,
 				02C212B52B43264800628732 /* Assets.xcassets */,
 				02C212B72B43264800628732 /* LaunchScreen.storyboard */,
@@ -151,6 +154,7 @@
 				02C212AD2B43264600628732 /* AppDelegate.swift in Sources */,
 				02C33E2E2B43E09900D21A59 /* TripFunctions.swift in Sources */,
 				02C33E302B43E3E300D21A59 /* Data.swift in Sources */,
+				02C33E332B43EBF400D21A59 /* TripsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
