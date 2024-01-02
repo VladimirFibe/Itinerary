@@ -5,11 +5,17 @@ class TripFunctions {
 
     }
 
-    static func read() {
-        if Data.trips.isEmpty {
-            Data.trips.append(.init(title: "Trip to Bali!"))
-            Data.trips.append(.init(title: "Mexico"))
-            Data.trips.append(.init(title: "Russian Trip"))
+    static func read(comletion: @escaping () -> ()) {
+        DispatchQueue.global(qos: .userInteractive).async {
+            if Data.trips.isEmpty {
+                Data.trips.append(.init(title: "Trip to Bali!"))
+                Data.trips.append(.init(title: "Mexico"))
+                Data.trips.append(.init(title: "Russian Trip"))
+            }
+
+            DispatchQueue.main.async {
+                comletion()
+            }
         }
     }
 
