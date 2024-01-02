@@ -10,6 +10,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = .red
         window?.rootViewController = UIViewController()
         window?.makeKeyAndVisible()
+        TripFunctions.read {
+            Data.trips.forEach { print($0.title ?? "")}
+        }
         return true
     }
 }
