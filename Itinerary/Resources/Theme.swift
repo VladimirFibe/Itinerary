@@ -9,4 +9,5 @@ class Theme {
 
     static let actionButtonImage = UIImage(systemName: "plus")
     static let photoButtonImage = UIImage(systemName: "camera.fill")
+    static let deleteActionImage = UIImage(systemName: "xmark")
 }
