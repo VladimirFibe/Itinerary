@@ -1,7 +1,7 @@
 import UIKit
 
-class TripModel: Hashable, Equatable {
-    
+struct TripModel: Hashable {
+
     let id: UUID
     var title: String
     var image: UIImage?
@@ -11,13 +11,4 @@ class TripModel: Hashable, Equatable {
         self.title = title
         self.image = image
     }
-    
-    static func == (lhs: TripModel, rhs: TripModel) -> Bool {
-        lhs.id == rhs.id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
 }

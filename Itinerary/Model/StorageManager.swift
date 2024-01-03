@@ -1,5 +1,5 @@
 import Foundation
 
-class Data {
+final class StorageManager {
     static var trips: [TripModel] = []
 }
