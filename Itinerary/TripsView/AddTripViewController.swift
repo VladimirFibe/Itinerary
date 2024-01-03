@@ -1,6 +1,7 @@
 import UIKit
 
 final class AddTripViewController: UIViewController {
+    var doneSaving: (() -> ())?
 
     private let cardView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -40,7 +41,9 @@ final class AddTripViewController: UIViewController {
     }
 
     @objc private func save() {
-        TripFunctions.create(.init(title: tripTextField.text ?? "new"))
+        guard let title = tripTextField.text, !title.isEmpty else { return }
+        TripFunctions.create(.init(title: title))
+        doneSaving?()
         dismiss(animated: true)
     }
 
