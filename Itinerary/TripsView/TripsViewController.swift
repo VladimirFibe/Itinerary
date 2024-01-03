@@ -24,7 +24,10 @@ final class TripsViewController: UIViewController {
     }
 
     @objc private func addButtonHandle() {
-        print(#function)
+        let controller = AddTripViewController()
+        controller.modalPresentationStyle = .overCurrentContext
+        controller.modalTransitionStyle = .crossDissolve
+        present(controller, animated: true)
     }
 
     private func setupViews() {
