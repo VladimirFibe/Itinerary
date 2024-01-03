@@ -2,7 +2,7 @@ import Foundation
 
 class TripFunctions {
     static func create(_ trip: TripModel) {
-
+        Data.trips.append(trip)
     }
 
     static func read(comletion: @escaping () -> ()) {
