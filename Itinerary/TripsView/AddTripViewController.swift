@@ -1,19 +1,27 @@
 import UIKit
+import Photos
+import PhotosUI
 
 final class AddTripViewController: UIViewController {
     var doneSaving: (() -> ())?
 
-    private let cardView: UIView = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        return $0
-    }(PopupView())
+    private let cardView = PopupView()
 
     private let titleLabel: UILabel = {
+        $0.layer.shadowOpacity = 1
+        $0.layer.shadowColor = UIColor.white.cgColor
+        $0.layer.shadowOffset = .zero
+        $0.layer.shadowRadius = 5
         $0.text = "Add Trip"
         $0.font = UIFont(name: Theme.mainFontName, size: 24)
         $0.textColor = Theme.accent
         return $0
     }(UILabel())
+
+    private let photoButton: UIButton = {
+        $0.setImage(Theme.photoButtonImage, for: [])
+        return $0
+    }(UIButton(type: .system))
 
     private let tripTextField: UITextField = {
         $0.placeholder = "Trip name"
@@ -37,6 +45,10 @@ final class AddTripViewController: UIViewController {
         setupConstraints()
     }
 
+    @objc private func addPhoto() {
+        presentPhotoPicker()
+    }
+
     @objc private func cancel() {
         dismiss(animated: true)
     }
@@ -54,18 +66,25 @@ final class AddTripViewController: UIViewController {
             tripTextField.layer.borderWidth = 1
             return
         }
-        TripFunctions.create(.init(title: title))
+        TripFunctions.create(.init(title: title, image: cardView.image))
         doneSaving?()
         dismiss(animated: true)
     }
 
     private func setupViews() {
+        photoButton.addTarget(self, action: #selector(addPhoto), for: .primaryActionTriggered)
         cancelButton.addTarget(self, action: #selector(cancel), for: .primaryActionTriggered)
         saveButton.addTarget(self, action: #selector(save), for: .primaryActionTriggered)
         view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-        view.addSubview(cardView)
-        [titleLabel, tripTextField, cancelButton, saveButton].forEach {
-            cardView.addSubview($0)
+        [
+            cardView,
+            titleLabel,
+            photoButton,
+            tripTextField,
+            cancelButton,
+            saveButton
+        ].forEach {
+            view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
@@ -78,14 +97,19 @@ final class AddTripViewController: UIViewController {
             cardView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             cardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             cardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            cardView.heightAnchor.constraint(equalToConstant: 200),
 
             titleLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: padding),
             titleLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: padding),
-            titleLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -padding),
 
-            tripTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: spacing),
+            photoButton.topAnchor.constraint(equalTo: titleLabel.topAnchor),
+            photoButton.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            photoButton.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -padding),
+            photoButton.widthAnchor.constraint(equalToConstant: 30),
+            photoButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: spacing),
+
             tripTextField.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            tripTextField.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            tripTextField.trailingAnchor.constraint(equalTo: photoButton.trailingAnchor),
             tripTextField.heightAnchor.constraint(equalToConstant: 44),
             cancelButton.topAnchor.constraint(equalTo: tripTextField.bottomAnchor, constant: spacing),
             cancelButton.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
@@ -94,10 +118,34 @@ final class AddTripViewController: UIViewController {
 
             saveButton.topAnchor.constraint(equalTo: cancelButton.topAnchor),
             saveButton.bottomAnchor.constraint(equalTo: cancelButton.bottomAnchor),
-            saveButton.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            saveButton.trailingAnchor.constraint(equalTo: photoButton.trailingAnchor),
             saveButton.widthAnchor.constraint(equalTo: cancelButton.widthAnchor),
 
             cardView.bottomAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: padding)
         ])
+    }
+}
+
+extension AddTripViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController,
+                didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        guard let result = results.first else { return }
+        result.itemProvider.loadObject(ofClass: UIImage.self) { reading, error in
+            guard let image = reading as? UIImage, error == nil else {
+                return
+            }
+            DispatchQueue.main.async {
+                self.cardView.image = image
+            }
+        }
+    }
+
+    func presentPhotoPicker() {
+        var config = PHPickerConfiguration()
+        config.selectionLimit = 1
+        let picker = PHPickerViewController(configuration: config)
+        picker.delegate = self
+        present(picker, animated: true)
     }
 }

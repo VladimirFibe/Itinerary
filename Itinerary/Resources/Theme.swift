@@ -8,4 +8,5 @@ class Theme {
     static let tint: UIColor = .brandTint
 
     static let actionButtonImage = UIImage(systemName: "plus")
+    static let photoButtonImage = UIImage(systemName: "camera.fill")
 }

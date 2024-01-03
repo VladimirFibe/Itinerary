@@ -3,12 +3,13 @@ import UIKit
 final class TripCell: UITableViewCell {
     static let identifier = "TripCell"
     
-    private let cardView: UIView = {
+    private let cardView: UIImageView = {
         $0.backgroundColor = Theme.accent
         $0.addShadowAndRoundedCorners()
+        $0.contentMode = .scaleAspectFill
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
-    }(UIView())
+    }(UIImageView())
 
     private let titleLabel: UILabel = {
         $0.font = UIFont(name: Theme.mainFontName, size: 20)
@@ -30,10 +31,12 @@ final class TripCell: UITableViewCell {
 
     func configure(with trip: TripModel) {
         titleLabel.text = trip.title
+        cardView.image = trip.image
     }
 
     private func setupViews() {
         backgroundColor = .clear
+        selectionStyle = .none
         contentView.addSubview(cardView)
         cardView.addSubview(titleLabel)
     }
