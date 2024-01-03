@@ -17,6 +17,7 @@ final class AddTripViewController: UIViewController {
 
     private let tripTextField: UITextField = {
         $0.placeholder = "Trip name"
+        $0.borderStyle = .roundedRect
         return $0
     }(UITextField())
 
@@ -41,7 +42,18 @@ final class AddTripViewController: UIViewController {
     }
 
     @objc private func save() {
-        guard let title = tripTextField.text, !title.isEmpty else { return }
+        tripTextField.rightViewMode = .never
+        guard let title = tripTextField.text, !title.isEmpty else {
+            let imageView = UIImageView(image: UIImage(systemName: "exclamationmark.triangle.fill"))
+            imageView.tintColor = .red
+            imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            imageView.contentMode = .scaleAspectFit
+            tripTextField.rightView =  imageView
+            tripTextField.rightViewMode = .always
+            tripTextField.layer.borderColor = UIColor.red.cgColor
+            tripTextField.layer.borderWidth = 1
+            return
+        }
         TripFunctions.create(.init(title: title))
         doneSaving?()
         dismiss(animated: true)
@@ -74,7 +86,7 @@ final class AddTripViewController: UIViewController {
             tripTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: spacing),
             tripTextField.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             tripTextField.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-
+            tripTextField.heightAnchor.constraint(equalToConstant: 44),
             cancelButton.topAnchor.constraint(equalTo: tripTextField.bottomAnchor, constant: spacing),
             cancelButton.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             cancelButton.heightAnchor.constraint(equalToConstant: 44),
