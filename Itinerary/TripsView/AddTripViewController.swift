@@ -8,6 +8,10 @@ final class AddTripViewController: UIViewController {
     private let cardView = PopupView()
 
     private let titleLabel: UILabel = {
+        $0.layer.shadowOpacity = 1
+        $0.layer.shadowColor = UIColor.white.cgColor
+        $0.layer.shadowOffset = .zero
+        $0.layer.shadowRadius = 5
         $0.text = "Add Trip"
         $0.font = UIFont(name: Theme.mainFontName, size: 24)
         $0.textColor = Theme.accent

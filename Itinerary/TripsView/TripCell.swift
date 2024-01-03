@@ -36,6 +36,7 @@ final class TripCell: UITableViewCell {
 
     private func setupViews() {
         backgroundColor = .clear
+        selectionStyle = .none
         contentView.addSubview(cardView)
         cardView.addSubview(titleLabel)
     }
