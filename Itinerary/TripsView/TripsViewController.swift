@@ -1,10 +1,15 @@
 import UIKit
+import SwiftData
 
 final class TripsViewController: UIViewController {
     enum Section { case main }
     var dataSource: UITableViewDiffableDataSource<Section, TripModel>!
+    var container: ModelContainer?
     private let tableView = UITableView()
-
+    private var trips: [TripModel] = [] {
+        didSet { updateData() }
+    }
+    
     private let addButton: UIButton = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setImage(Theme.actionButtonImage, for: [])
@@ -12,16 +17,12 @@ final class TripsViewController: UIViewController {
         return $0
     }(UIButton(type: .system))
 
-    private var trips: [TripModel] = [] {
-        didSet { updateData() }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
-        TripFunctions.read { [weak self] in
-            self?.trips = Data.trips
+        TripFunctions.read { [weak self] trips in
+            self?.trips = trips
         }
     }
 
@@ -84,8 +85,7 @@ final class TripsViewController: UIViewController {
 // MARK: - UITableViewDelegate
 extension TripsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        trips[indexPath.row].title = "New Value"
-        updateData()
+
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -94,14 +94,14 @@ extension TripsViewController: UITableViewDelegate {
                 actionPerformed(false)
                 return
             }
-            let title = trips[indexPath.row].title
+            let title = "Data.trips[indexPath.row].title"
             let alert = UIAlertController(title: "Delete Trip", message: "Are you sure you want to delete this trip \(title)?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
                 actionPerformed(false)
             }))
             alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
                 TripFunctions.delete(self.trips[indexPath.row])
-                self.trips = Data.trips
+                self.trips = StorageManager.trips
                 actionPerformed(true)
             }))
             self.present(alert, animated: true)
@@ -127,7 +127,7 @@ extension TripsViewController: UITableViewDelegate {
         controller.modalPresentationStyle = .overCurrentContext
         controller.modalTransitionStyle = .crossDissolve
         controller.doneSaving = { [weak self] in
-            self?.trips = Data.trips
+            self?.trips = StorageManager.trips
         }
         self.present(controller, animated: true)
     }

@@ -67,12 +67,12 @@ final class AddTripViewController: UIViewController {
             tripTextField.layer.borderWidth = 1
             return
         }
-        if trip == nil {
-            TripFunctions.create(.init(title: title, image: cardView.image))
+        if var trip {
+            trip.image = cardView.image
+            trip.title = title
+            TripFunctions.update(trip)
         } else {
-            trip?.title = title
-            trip?.image = cardView.image
-//            TripFunctions.update(trip)
+            TripFunctions.create(.init(title: title, image: cardView.image))
         }
         doneSaving?()
         dismiss(animated: true)
