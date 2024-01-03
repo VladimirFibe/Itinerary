@@ -19,8 +19,7 @@ class TripFunctions {
         }
     }
 
-    static func update(_ trip: TripModel) {
-
+    static func update(_ trip: TripModel?) {
     }
 
     static func delete(_ trip: TripModel) {

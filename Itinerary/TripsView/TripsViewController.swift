@@ -26,11 +26,7 @@ final class TripsViewController: UIViewController {
     }
 
     @objc private func addButtonHandle() {
-        let controller = AddTripViewController()
-        controller.modalPresentationStyle = .overCurrentContext
-        controller.modalTransitionStyle = .crossDissolve
-        controller.doneSaving = { [weak self] in self?.trips = Data.trips }
-        present(controller, animated: true)
+        updateTrip()
     }
 
     private func setupViews() {
@@ -85,24 +81,11 @@ final class TripsViewController: UIViewController {
     }
 
 }
-// MARK: - UITableViewDataSource
-//extension TripsViewController: UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        trips.count
-//    }
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(
-//            withIdentifier: TripCell.identifier,
-//            for: indexPath
-//        ) as? TripCell else { fatalError() }
-//        cell.configure(with: trips[indexPath.row])
-//        return cell
-//    }
-//}
 // MARK: - UITableViewDelegate
 extension TripsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        trips[indexPath.row].title = "New Value"
+        updateData()
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -125,10 +108,27 @@ extension TripsViewController: UITableViewDelegate {
         }
         delete.image = Theme.deleteActionImage
         return UISwipeActionsConfiguration(actions: [delete])
-        #warning("добавить анимацию при удалении")
     }
 
-    private func deleteTrip() {
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let edit = UIContextualAction(style: .normal, title: "Edit") { [weak self] action, view, actionPerformed in
+            guard let self else { return }
+            self.updateTrip(trips[indexPath.row])
+            actionPerformed(true)
+        }
+        edit.image = Theme.editActionImage
+        edit.backgroundColor = .systemBlue
+        return UISwipeActionsConfiguration(actions: [edit])
+    }
 
+    func updateTrip(_ trip: TripModel? = nil) {
+        let controller = AddTripViewController()
+        controller.trip = trip
+        controller.modalPresentationStyle = .overCurrentContext
+        controller.modalTransitionStyle = .crossDissolve
+        controller.doneSaving = { [weak self] in
+            self?.trips = Data.trips
+        }
+        self.present(controller, animated: true)
     }
 }

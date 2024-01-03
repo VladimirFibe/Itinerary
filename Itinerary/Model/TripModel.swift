@@ -18,6 +18,7 @@ class TripModel: Hashable, Equatable {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+        hasher.combine(title)
     }
     
 }

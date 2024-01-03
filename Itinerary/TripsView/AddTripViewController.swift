@@ -4,6 +4,7 @@ import PhotosUI
 
 final class AddTripViewController: UIViewController {
     var doneSaving: (() -> ())?
+    var trip: TripModel?
 
     private let cardView = PopupView()
 
@@ -66,7 +67,13 @@ final class AddTripViewController: UIViewController {
             tripTextField.layer.borderWidth = 1
             return
         }
-        TripFunctions.create(.init(title: title, image: cardView.image))
+        if trip == nil {
+            TripFunctions.create(.init(title: title, image: cardView.image))
+        } else {
+            trip?.title = title
+            trip?.image = cardView.image
+//            TripFunctions.update(trip)
+        }
         doneSaving?()
         dismiss(animated: true)
     }
@@ -86,6 +93,10 @@ final class AddTripViewController: UIViewController {
         ].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        if let trip {
+            tripTextField.text = trip.title
+            cardView.image = trip.image
         }
     }
 
