@@ -27,6 +27,7 @@ final class TripsViewController: UIViewController {
         let controller = AddTripViewController()
         controller.modalPresentationStyle = .overCurrentContext
         controller.modalTransitionStyle = .crossDissolve
+        controller.doneSaving = { [weak self] in self?.trips = Data.trips }
         present(controller, animated: true)
     }
 
