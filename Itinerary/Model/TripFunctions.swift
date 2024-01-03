@@ -24,6 +24,6 @@ class TripFunctions {
     }
 
     static func delete(_ trip: TripModel) {
-
+        Data.trips.removeAll(where: {$0.id == trip.id })
     }
 }

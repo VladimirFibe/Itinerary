@@ -1,6 +1,8 @@
 import UIKit
 
 final class TripsViewController: UIViewController {
+    enum Section { case main }
+    var dataSource: UITableViewDiffableDataSource<Section, TripModel>!
     private let tableView = UITableView()
 
     private let addButton: UIButton = {
@@ -11,7 +13,7 @@ final class TripsViewController: UIViewController {
     }(UIButton(type: .system))
 
     private var trips: [TripModel] = [] {
-        didSet { tableView.reloadData() }
+        didSet { updateData() }
     }
 
     override func viewDidLoad() {
@@ -50,7 +52,22 @@ final class TripsViewController: UIViewController {
             forCellReuseIdentifier: TripCell.identifier
         )
         tableView.separatorStyle = .none
-        tableView.dataSource = self
+        tableView.delegate = self
+        dataSource = UITableViewDiffableDataSource<Section, TripModel>(tableView: tableView, cellProvider: { tableView, indexPath, trip in
+                    guard let cell = tableView.dequeueReusableCell(
+                        withIdentifier: TripCell.identifier,
+                        for: indexPath
+                    ) as? TripCell else { fatalError() }
+                    cell.configure(with: trip)
+                    return cell
+        })
+    }
+
+    private func updateData() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, TripModel>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(trips)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
 
     private func setupConstraints() {
@@ -69,16 +86,49 @@ final class TripsViewController: UIViewController {
 
 }
 // MARK: - UITableViewDataSource
-extension TripsViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        trips.count
+//extension TripsViewController: UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        trips.count
+//    }
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        guard let cell = tableView.dequeueReusableCell(
+//            withIdentifier: TripCell.identifier,
+//            for: indexPath
+//        ) as? TripCell else { fatalError() }
+//        cell.configure(with: trips[indexPath.row])
+//        return cell
+//    }
+//}
+// MARK: - UITableViewDelegate
+extension TripsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: TripCell.identifier,
-            for: indexPath
-        ) as? TripCell else { fatalError() }
-        cell.configure(with: trips[indexPath.row])
-        return cell
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "Delete") {[weak self] action, view, actionPerformed in
+            guard let self else {
+                actionPerformed(false)
+                return
+            }
+            let title = trips[indexPath.row].title
+            let alert = UIAlertController(title: "Delete Trip", message: "Are you sure you want to delete this trip \(title)?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                actionPerformed(false)
+            }))
+            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                TripFunctions.delete(self.trips[indexPath.row])
+                self.trips = Data.trips
+                actionPerformed(true)
+            }))
+            self.present(alert, animated: true)
+        }
+        delete.image = Theme.deleteActionImage
+        return UISwipeActionsConfiguration(actions: [delete])
+        #warning("добавить анимацию при удалении")
+    }
+
+    private func deleteTrip() {
+
     }
 }
