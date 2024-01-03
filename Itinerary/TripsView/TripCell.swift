@@ -31,7 +31,14 @@ final class TripCell: UITableViewCell {
 
     func configure(with trip: TripModel) {
         titleLabel.text = trip.title
-        cardView.image = trip.image
+        if let image = trip.image {
+            cardView.alpha = 0.3
+            cardView.image = image
+            UIView.animate(withDuration: 1) {
+                self.cardView.alpha = 1
+            }
+
+        }
     }
 
     private func setupViews() {
