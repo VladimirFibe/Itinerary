@@ -11,6 +11,7 @@
 		024F20DA2B451DAB00B926C7 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F20D92B451DAB00B926C7 /* PopupView.swift */; };
 		024F20DD2B451FF600B926C7 /* TripButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F20DC2B451FF600B926C7 /* TripButton.swift */; };
 		02B659192B45CF99007FEF93 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B659182B45CF99007FEF93 /* StorageManager.swift */; };
+		02B6591B2B462750007FEF93 /* TripHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B6591A2B462750007FEF93 /* TripHelpView.swift */; };
 		02C212AD2B43264600628732 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C212AC2B43264600628732 /* AppDelegate.swift */; };
 		02C212B62B43264800628732 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02C212B52B43264800628732 /* Assets.xcassets */; };
 		02C212B92B43264800628732 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02C212B72B43264800628732 /* LaunchScreen.storyboard */; };
@@ -30,6 +31,7 @@
 		024F20D92B451DAB00B926C7 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		024F20DC2B451FF600B926C7 /* TripButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripButton.swift; sourceTree = "<group>"; };
 		02B659182B45CF99007FEF93 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		02B6591A2B462750007FEF93 /* TripHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHelpView.swift; sourceTree = "<group>"; };
 		02C212A92B43264600628732 /* Itinerary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Itinerary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02C212AC2B43264600628732 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02C212B52B43264800628732 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				02C33E322B43EBF400D21A59 /* TripsViewController.swift */,
+				02B6591A2B462750007FEF93 /* TripHelpView.swift */,
 				024F20D72B450FC300B926C7 /* AddTripViewController.swift */,
 				02C33E342B43F35600D21A59 /* TripCell.swift */,
 			);
@@ -227,6 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02B6591B2B462750007FEF93 /* TripHelpView.swift in Sources */,
 				024F20DA2B451DAB00B926C7 /* PopupView.swift in Sources */,
 				02C33E2C2B43E08B00D21A59 /* TripModel.swift in Sources */,
 				02C33E3D2B44173900D21A59 /* Theme.swift in Sources */,

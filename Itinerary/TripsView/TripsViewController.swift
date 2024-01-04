@@ -6,6 +6,12 @@ final class TripsViewController: UIViewController {
     var dataSource: UITableViewDiffableDataSource<Section, TripModel>!
     var container: ModelContainer?
     private let tableView = UITableView()
+    private let helpView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        return blurredEffectView
+    }()
+    let seenHelpView = "seenHelpView"
     private var trips: [TripModel] = [] {
         didSet { updateData() }
     }
@@ -16,13 +22,28 @@ final class TripsViewController: UIViewController {
         $0.createFloatingActionButton()
         return $0
     }(UIButton(type: .system))
+    
+    private let helpContentView = TripHelpView()
+
+    private let closeButton: TripButton = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.setTitle("Close", for: [])
+        return $0
+    }(TripButton(type: .system))
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
         TripFunctions.read { [weak self] trips in
-            self?.trips = trips
+            guard let self else { return }
+            self.trips = trips
+            if trips.count > 0 {
+                if UserDefaults.standard.bool(forKey: self.seenHelpView) == false {
+                    self.view.addSubview(self.helpView)
+                    self.helpView.frame = self.view.bounds
+                }
+            }
         }
     }
 
@@ -30,10 +51,30 @@ final class TripsViewController: UIViewController {
         updateTrip()
     }
 
+    @objc private func closeHelpView() {
+        UIView.animate(withDuration: 0.5) { [weak self] in
+            self?.helpView.alpha = 0
+        } completion: { [weak self] success in
+            guard let self else { return }
+            self.helpView.removeFromSuperview()
+//            UserDefaults.standard.set(true, forKey: self.seenHelpView)
+        }
+    }
+
     private func setupViews() {
         setupTableView()
         view.backgroundColor = Theme.background
         view.addSubview(addButton)
+
+        helpView.contentView.addSubview(helpContentView)
+        helpView.contentView.addSubview(closeButton)
+
+        closeButton.addTarget(
+            self,
+            action: #selector(closeHelpView),
+            for: .primaryActionTriggered
+        )
+
         addButton.addTarget(
             self,
             action: #selector(addButtonHandle),
@@ -77,7 +118,15 @@ final class TripsViewController: UIViewController {
             addButton.widthAnchor.constraint(equalToConstant: 56),
             addButton.heightAnchor.constraint(equalTo: addButton.widthAnchor),
             addButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+
+            helpContentView.topAnchor.constraint(equalTo: helpView.topAnchor, constant: 50),
+            helpContentView.leadingAnchor.constraint(equalTo: helpView.leadingAnchor, constant: 18),
+            helpContentView.trailingAnchor.constraint(equalTo: helpView.trailingAnchor, constant: -18),
+            closeButton.centerXAnchor.constraint(equalTo: helpView.centerXAnchor),
+            closeButton.bottomAnchor.constraint(equalTo: helpView.bottomAnchor, constant: -100),
+            closeButton.heightAnchor.constraint(equalToConstant: 44),
+            closeButton.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
 
