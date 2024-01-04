@@ -97,6 +97,7 @@ final class AddTripViewController: UIViewController {
         if let trip {
             tripTextField.text = trip.title
             cardView.image = trip.image
+            titleLabel.text = "Edit Trip"
         }
     }
 
