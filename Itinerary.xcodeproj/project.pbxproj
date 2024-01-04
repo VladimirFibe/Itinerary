@@ -11,7 +11,10 @@
 		024F20DA2B451DAB00B926C7 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F20D92B451DAB00B926C7 /* PopupView.swift */; };
 		024F20DD2B451FF600B926C7 /* TripButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F20DC2B451FF600B926C7 /* TripButton.swift */; };
 		02768FE32B46BC8400FC7154 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02768FE22B46BC8400FC7154 /* ActivitiesViewController.swift */; };
-		02B659192B45CF99007FEF93 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B659182B45CF99007FEF93 /* StorageManager.swift */; };
+		02768FE62B46DBD700FC7154 /* DayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02768FE52B46DBD700FC7154 /* DayModel.swift */; };
+		02768FE82B46DD7500FC7154 /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02768FE72B46DD7500FC7154 /* ActivityModel.swift */; };
+		02768FEA2B46DDA000FC7154 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02768FE92B46DDA000FC7154 /* ActivityType.swift */; };
+		02B659192B45CF99007FEF93 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B659182B45CF99007FEF93 /* Data.swift */; };
 		02B6591B2B462750007FEF93 /* TripHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B6591A2B462750007FEF93 /* TripHelpView.swift */; };
 		02C212AD2B43264600628732 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C212AC2B43264600628732 /* AppDelegate.swift */; };
 		02C212B62B43264800628732 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02C212B52B43264800628732 /* Assets.xcassets */; };
@@ -32,7 +35,10 @@
 		024F20D92B451DAB00B926C7 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		024F20DC2B451FF600B926C7 /* TripButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripButton.swift; sourceTree = "<group>"; };
 		02768FE22B46BC8400FC7154 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
-		02B659182B45CF99007FEF93 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		02768FE52B46DBD700FC7154 /* DayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayModel.swift; sourceTree = "<group>"; };
+		02768FE72B46DD7500FC7154 /* ActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
+		02768FE92B46DDA000FC7154 /* ActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityType.swift; sourceTree = "<group>"; };
+		02B659182B45CF99007FEF93 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		02B6591A2B462750007FEF93 /* TripHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHelpView.swift; sourceTree = "<group>"; };
 		02C212A92B43264600628732 /* Itinerary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Itinerary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02C212AC2B43264600628732 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -115,8 +121,11 @@
 			isa = PBXGroup;
 			children = (
 				02C33E2B2B43E08B00D21A59 /* TripModel.swift */,
-				02B659182B45CF99007FEF93 /* StorageManager.swift */,
+				02B659182B45CF99007FEF93 /* Data.swift */,
 				02C33E2D2B43E09900D21A59 /* TripFunctions.swift */,
+				02768FE52B46DBD700FC7154 /* DayModel.swift */,
+				02768FE72B46DD7500FC7154 /* ActivityModel.swift */,
+				02768FE92B46DDA000FC7154 /* ActivityType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -246,12 +255,15 @@
 				02C33E2C2B43E08B00D21A59 /* TripModel.swift in Sources */,
 				02768FE32B46BC8400FC7154 /* ActivitiesViewController.swift in Sources */,
 				02C33E3D2B44173900D21A59 /* Theme.swift in Sources */,
-				02B659192B45CF99007FEF93 /* StorageManager.swift in Sources */,
+				02B659192B45CF99007FEF93 /* Data.swift in Sources */,
+				02768FE62B46DBD700FC7154 /* DayModel.swift in Sources */,
 				02C33E372B4405ED00D21A59 /* UIView+Extension.swift in Sources */,
 				02C212AD2B43264600628732 /* AppDelegate.swift in Sources */,
 				02C33E2E2B43E09900D21A59 /* TripFunctions.swift in Sources */,
 				024F20D82B450FC300B926C7 /* AddTripViewController.swift in Sources */,
+				02768FEA2B46DDA000FC7154 /* ActivityType.swift in Sources */,
 				02C33E442B44730100D21A59 /* UIButton+Extension.swift in Sources */,
+				02768FE82B46DD7500FC7154 /* ActivityModel.swift in Sources */,
 				02C33E352B43F35600D21A59 /* TripCell.swift in Sources */,
 				024F20DD2B451FF600B926C7 /* TripButton.swift in Sources */,
 				02C33E332B43EBF400D21A59 /* TripsViewController.swift in Sources */,

@@ -152,7 +152,7 @@ extension TripsViewController: UITableViewDelegate {
             }))
             alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
                 TripFunctions.delete(self.trips[indexPath.row])
-                self.trips = StorageManager.trips
+                self.trips = Data.trips
                 actionPerformed(true)
             }))
             self.present(alert, animated: true)
@@ -178,7 +178,7 @@ extension TripsViewController: UITableViewDelegate {
         controller.modalPresentationStyle = .overCurrentContext
         controller.modalTransitionStyle = .crossDissolve
         controller.doneSaving = { [weak self] in
-            self?.trips = StorageManager.trips
+            self?.trips = Data.trips
         }
         self.present(controller, animated: true)
     }
