@@ -35,7 +35,7 @@ final class TripsViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
-        TripFunctions.read { [weak self] trips in
+        TripFunctions.readTrips { [weak self] trips in
             guard let self else { return }
             self.trips = trips
             if trips.count > 0 {
@@ -57,7 +57,7 @@ final class TripsViewController: UIViewController {
         } completion: { [weak self] success in
             guard let self else { return }
             self.helpView.removeFromSuperview()
-//            UserDefaults.standard.set(true, forKey: self.seenHelpView)
+            UserDefaults.standard.set(true, forKey: self.seenHelpView)
         }
     }
 
@@ -134,8 +134,7 @@ final class TripsViewController: UIViewController {
 // MARK: - UITableViewDelegate
 extension TripsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = ActivitiesViewController()
-        controller.title = trips[indexPath.row].title
+        let controller = ActivitiesViewController(tripId: trips[indexPath.row].id)
         navigationController?.pushViewController(controller, animated: true)
     }
 

@@ -4,9 +4,9 @@ class Data {
     static var trips: [TripModel] = []
     static func createMockTripModelData() {
         trips = [
-            .init(title: "Trip to Bali!", days: createmockDayModelData()),
-            .init(title: "Mexico"),
-            .init(title: "Russian Trip")
+            .init(title: "Trip to Bali!", image: .bali, days: createmockDayModelData()),
+            .init(title: "Mexico", image: .mexico),
+            .init(title: "Russian Trip", image: .russia)
         ]
     }
 

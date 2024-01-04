@@ -5,7 +5,7 @@ class TripFunctions {
         Data.trips.append(trip)
     }
 
-    static func read(comletion: @escaping ([TripModel]) -> ()) {
+    static func readTrips(comletion: @escaping ([TripModel]) -> ()) {
         DispatchQueue.global(qos: .userInteractive).async {
             if Data.trips.isEmpty {
                 Data.createMockTripModelData()
@@ -14,6 +14,13 @@ class TripFunctions {
             DispatchQueue.main.async {
                 comletion(Data.trips)
             }
+        }
+    }
+
+    static func readTrip(id: UUID, completion: @escaping (TripModel?) -> ()) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let trip = Data.trips.first(where: { $0.id == id })
+            DispatchQueue.main.async { completion(trip)}
         }
     }
 
