@@ -45,6 +45,7 @@ final class ActivitiesViewController: UIViewController {
         }
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.register(ActivityHeader.self, forHeaderFooterViewReuseIdentifier: ActivityHeader.identifier)
     }
 
     private func setupConstraints() {
@@ -80,8 +81,8 @@ extension ActivitiesViewController: UITableViewDataSource {
 
 extension ActivitiesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = ActivityHeader()
-        header.configure(with: days[section].title, subTitle: days[section].subtitle)
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: ActivityHeader.identifier) as? ActivityHeader else { return nil }
+        header.configure(with: days[section])
         return header
     }
 }
