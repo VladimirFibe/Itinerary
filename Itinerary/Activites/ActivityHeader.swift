@@ -6,8 +6,15 @@ final class ActivityHeader: UIView {
     }(UILabel())
 
     private let subTitleLabel: UILabel = {
+        $0.textAlignment = .right
         return $0
     }(UILabel())
+
+    private let stackView: UIStackView = {
+        $0.distribution = .fillEqually
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UIStackView())
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,18 +32,19 @@ final class ActivityHeader: UIView {
     }
     
     private func setupViews() {
+        addSubview(stackView)
         [titleLabel, subTitleLabel].forEach {
-            addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
+            stackView.addArrangedSubview($0)
         }
     }
 
     private func setupContstraints() {
+        let padding = 20.0
         NSLayoutConstraint.activate([
-            titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            subTitleLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            subTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+            stackView.topAnchor.constraint(equalTo: topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 }
