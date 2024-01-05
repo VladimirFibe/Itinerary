@@ -18,7 +18,7 @@ final class ActivityCell: UITableViewCell {
     }(UIImageView())
 
     private let titleLabel: UILabel = {
-        $0.font = UIFont(name: Theme.bodyFontNameBold, size: 17)
+        $0.font = UIFont(name: Theme.bodyFontNameDemiBold, size: 17)
         $0.textAlignment = .left
         $0.textColor = .white
         return $0
@@ -58,7 +58,7 @@ final class ActivityCell: UITableViewCell {
     }
 
     private func setupConstraints() {
-        let padding = 10.0
+        let padding = 12.0
         NSLayoutConstraint.activate([
             cardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
             cardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
