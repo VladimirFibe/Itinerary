@@ -5,6 +5,13 @@ final class ActivitiesViewController: UIViewController {
     var days: [DayModel] = [] {
         didSet { tableView.reloadData()}
     }
+
+    private let addButton: UIButton = {
+        $0.setImage(Theme.actionButtonImage, for: [])
+        $0.createFloatingActionButton()
+        return $0
+    }(UIButton(type: .system))
+
     private let backgroundImageView: UIImageView = {
         $0.clipsToBounds = true
         $0.contentMode = .scaleAspectFill
@@ -46,12 +53,51 @@ final class ActivitiesViewController: UIViewController {
     }
 
     private func setupView() {
-        [backgroundImageView, tableView].forEach {
+        [backgroundImageView, tableView, addButton].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         tableView.dataSource = self
         tableView.delegate = self
+        addButton.addTarget(
+            self,
+            action: #selector(addButtonHandler),
+            for: .primaryActionTriggered
+        )
+    }
+
+    @objc func addButtonHandler() {
+        let alert = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        let dayAction = UIAlertAction(
+            title: "Day",
+            style: .default,
+            handler: handleAddDay
+        )
+        let activityAction = UIAlertAction(
+            title: "Activity",
+            style: .default,
+            handler: handleAddActivity
+        )
+        let cancelAction = UIAlertAction(
+            title: "Cancel",
+            style: .cancel
+        )
+        alert.addAction(dayAction)
+        alert.addAction(activityAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+    }
+
+    private func handleAddDay(action: UIAlertAction) {
+        print("add day")
+    }
+
+    private func handleAddActivity(action: UIAlertAction) {
+        print(#function)
     }
 
     private func setupConstraints() {
@@ -60,10 +106,17 @@ final class ActivitiesViewController: UIViewController {
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            addButton.widthAnchor.constraint(equalToConstant: 56),
+            addButton.heightAnchor.constraint(equalTo: addButton.widthAnchor),
+            addButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+
         ])
     }
 }
