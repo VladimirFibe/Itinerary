@@ -40,7 +40,6 @@ final class ActivitiesViewController: UIViewController {
         setupConstraints()
         TripFunctions.readTrip(id: tripId) {[weak self] trip in
             guard let self, let trip else { return }
-            self.navigationItem.title = trip.title
             self.backgroundImageView.image = trip.image
             self.days = trip.days
         }

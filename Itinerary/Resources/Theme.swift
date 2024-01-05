@@ -9,6 +9,7 @@ class Theme {
     static let accent: UIColor = .accent
     static let background: UIColor = .background
     static let tint: UIColor = .brandTint
+    static let edit: UIColor = .edit
 
     static let actionButtonImage = UIImage(systemName: "plus")
     static let photoButtonImage = UIImage(systemName: "camera.fill")
