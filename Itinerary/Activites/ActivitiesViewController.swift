@@ -45,7 +45,15 @@ final class ActivitiesViewController: UIViewController {
         }
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(ActivityHeader.self, forHeaderFooterViewReuseIdentifier: ActivityHeader.identifier)
+        tableView.separatorStyle = .none
+        tableView.register(
+            ActivityHeader.self,
+            forHeaderFooterViewReuseIdentifier: ActivityHeader.identifier
+        )
+        tableView.register(
+            ActivityCell.self,
+            forCellReuseIdentifier: ActivityCell.identifier
+        )
     }
 
     private func setupConstraints() {
@@ -72,9 +80,11 @@ extension ActivitiesViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = days[indexPath.section].activityModels[indexPath.row].title
-        cell.backgroundColor = .clear
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: ActivityCell.identifier,
+            for: indexPath
+        ) as? ActivityCell else { fatalError()}
+        cell.configure(with: days[indexPath.section].activityModels[indexPath.row])
         return cell
     }
 }
