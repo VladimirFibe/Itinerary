@@ -1,7 +1,6 @@
 import UIKit
 
 final class ActivityHeader: UITableViewHeaderFooterView {
-    static let identifier = "ActivityHeader"
     private let titleLabel: UILabel = {
         $0.font = UIFont(name: Theme.bodyFontNameBold, size: 17)
         return $0

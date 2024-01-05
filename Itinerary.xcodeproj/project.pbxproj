@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		021B8FB52B47E180000856E4 /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021B8FB42B47E180000856E4 /* UITableViewCell+Extension.swift */; };
+		021B8FB72B47E1ED000856E4 /* UITableViewHeaderFooterView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021B8FB62B47E1ED000856E4 /* UITableViewHeaderFooterView+Extension.swift */; };
 		024F20D82B450FC300B926C7 /* AddTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F20D72B450FC300B926C7 /* AddTripViewController.swift */; };
 		024F20DA2B451DAB00B926C7 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F20D92B451DAB00B926C7 /* PopupView.swift */; };
 		024F20DD2B451FF600B926C7 /* TripButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F20DC2B451FF600B926C7 /* TripButton.swift */; };
@@ -33,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		021B8FB42B47E180000856E4 /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
+		021B8FB62B47E1ED000856E4 /* UITableViewHeaderFooterView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewHeaderFooterView+Extension.swift"; sourceTree = "<group>"; };
 		024F20D72B450FC300B926C7 /* AddTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripViewController.swift; sourceTree = "<group>"; };
 		024F20D92B451DAB00B926C7 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		024F20DC2B451FF600B926C7 /* TripButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripButton.swift; sourceTree = "<group>"; };
@@ -160,6 +164,8 @@
 			children = (
 				02C33E362B4405ED00D21A59 /* UIView+Extension.swift */,
 				02C33E432B44730100D21A59 /* UIButton+Extension.swift */,
+				021B8FB42B47E180000856E4 /* UITableViewCell+Extension.swift */,
+				021B8FB62B47E1ED000856E4 /* UITableViewHeaderFooterView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -266,7 +272,9 @@
 				02C33E372B4405ED00D21A59 /* UIView+Extension.swift in Sources */,
 				02C212AD2B43264600628732 /* AppDelegate.swift in Sources */,
 				028088542B47962D008CFE86 /* ActivityHeader.swift in Sources */,
+				021B8FB72B47E1ED000856E4 /* UITableViewHeaderFooterView+Extension.swift in Sources */,
 				02C33E2E2B43E09900D21A59 /* TripFunctions.swift in Sources */,
+				021B8FB52B47E180000856E4 /* UITableViewCell+Extension.swift in Sources */,
 				024F20D82B450FC300B926C7 /* AddTripViewController.swift in Sources */,
 				02768FEA2B46DDA000FC7154 /* ActivityType.swift in Sources */,
 				028088562B47B964008CFE86 /* ActivityCell.swift in Sources */,

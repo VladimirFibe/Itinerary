@@ -144,7 +144,7 @@ extension TripsViewController: UITableViewDelegate {
                 actionPerformed(false)
                 return
             }
-            let title = "Data.trips[indexPath.row].title"
+            let title = trips[indexPath.row].title
             let alert = UIAlertController(title: "Delete Trip", message: "Are you sure you want to delete this trip \(title)?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
                 actionPerformed(false)

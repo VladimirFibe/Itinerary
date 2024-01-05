@@ -1,8 +1,6 @@
 import UIKit
 
 final class ActivityCell: UITableViewCell {
-    static let identifier = "ActivityCell"
-    
     private let cardView: UIImageView = {
         $0.backgroundColor = Theme.accent
         $0.addShadowAndRoundedCorners()

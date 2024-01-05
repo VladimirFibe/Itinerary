@@ -1,8 +1,6 @@
 import UIKit
 
 final class TripCell: UITableViewCell {
-    static let identifier = "TripCell"
-    
     private let cardView: UIImageView = {
         $0.backgroundColor = Theme.accent
         $0.addShadowAndRoundedCorners()

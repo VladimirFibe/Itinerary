@@ -13,7 +13,15 @@ final class ActivitiesViewController: UIViewController {
 
     private let tableView: UITableView = {
         $0.backgroundColor = .clear
-        $0.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        $0.separatorStyle = .none
+        $0.register(
+            ActivityHeader.self,
+            forHeaderFooterViewReuseIdentifier: ActivityHeader.identifier
+        )
+        $0.register(
+            ActivityCell.self,
+            forCellReuseIdentifier: ActivityCell.identifier
+        )
         return $0
     }(UITableView())
 
@@ -45,15 +53,6 @@ final class ActivitiesViewController: UIViewController {
         }
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.separatorStyle = .none
-        tableView.register(
-            ActivityHeader.self,
-            forHeaderFooterViewReuseIdentifier: ActivityHeader.identifier
-        )
-        tableView.register(
-            ActivityCell.self,
-            forCellReuseIdentifier: ActivityCell.identifier
-        )
     }
 
     private func setupConstraints() {
