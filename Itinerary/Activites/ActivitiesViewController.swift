@@ -66,10 +66,6 @@ extension ActivitiesViewController: UITableViewDataSource {
         days.count
     }
 
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        days[section].title
-    }
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         days[section].activityModels.count
     }
@@ -83,5 +79,9 @@ extension ActivitiesViewController: UITableViewDataSource {
 }
 
 extension ActivitiesViewController: UITableViewDelegate {
-
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = ActivityHeader()
+        header.configure(with: days[section].title, subTitle: days[section].subtitle)
+        return header
+    }
 }
