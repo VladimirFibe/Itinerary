@@ -66,7 +66,7 @@ final class ActivitiesViewController: UIViewController {
         )
     }
 
-    @objc func addButtonHandler() {
+    @objc func addButtonHandler(_ sender: UIButton) {
         let alert = UIAlertController(
             title: nil,
             message: nil,
@@ -89,6 +89,13 @@ final class ActivitiesViewController: UIViewController {
         alert.addAction(dayAction)
         alert.addAction(activityAction)
         alert.addAction(cancelAction)
+        alert.popoverPresentationController?.sourceView = sender
+        alert.popoverPresentationController?.sourceRect = CGRect(
+            x: 0,
+            y: -sender.bounds.height / 2,
+            width: sender.bounds.width,
+            height: sender.bounds.height
+        )
         present(alert, animated: true)
     }
 
