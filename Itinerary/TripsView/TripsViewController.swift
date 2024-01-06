@@ -35,7 +35,7 @@ final class TripsViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
-        TripFunctions.read { [weak self] trips in
+        TripFunctions.readTrips { [weak self] trips in
             guard let self else { return }
             self.trips = trips
             if trips.count > 0 {
@@ -57,12 +57,13 @@ final class TripsViewController: UIViewController {
         } completion: { [weak self] success in
             guard let self else { return }
             self.helpView.removeFromSuperview()
-//            UserDefaults.standard.set(true, forKey: self.seenHelpView)
+            UserDefaults.standard.set(true, forKey: self.seenHelpView)
         }
     }
 
     private func setupViews() {
         setupTableView()
+        navigationItem.title = "Trips"
         view.backgroundColor = Theme.background
         view.addSubview(addButton)
 
@@ -134,25 +135,36 @@ final class TripsViewController: UIViewController {
 // MARK: - UITableViewDelegate
 extension TripsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = ActivitiesViewController()
-        controller.title = trips[indexPath.row].title
+        let controller = ActivitiesViewController(tripId: trips[indexPath.row].id)
+        controller.navigationItem.title = trips[indexPath.row].title
         navigationController?.pushViewController(controller, animated: true)
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .destructive, title: "Delete") {[weak self] action, view, actionPerformed in
+        let delete = UIContextualAction(style: .destructive, title: "Delete") {
+            [weak self] action,
+            view,
+            actionPerformed in
             guard let self else {
                 actionPerformed(false)
                 return
             }
-            let title = "Data.trips[indexPath.row].title"
-            let alert = UIAlertController(title: "Delete Trip", message: "Are you sure you want to delete this trip \(title)?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-                actionPerformed(false)
-            }))
-            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+            let title = trips[indexPath.row].title
+            let alert = UIAlertController(
+                title: "Delete Trip",
+                message: "Are you sure you want to delete this trip \(title)?",
+                preferredStyle: .alert
+            )
+            alert.addAction(
+                UIAlertAction(title: "Cancel",
+                              style: .cancel,
+                              handler: { _ in actionPerformed( false ) })
+            )
+            alert.addAction(UIAlertAction(title: "Delete", 
+                                          style: .destructive,
+                                          handler: { _ in
                 TripFunctions.delete(self.trips[indexPath.row])
-                self.trips = StorageManager.trips
+                self.trips = Data.trips
                 actionPerformed(true)
             }))
             self.present(alert, animated: true)
@@ -178,7 +190,7 @@ extension TripsViewController: UITableViewDelegate {
         controller.modalPresentationStyle = .overCurrentContext
         controller.modalTransitionStyle = .crossDissolve
         controller.doneSaving = { [weak self] in
-            self?.trips = StorageManager.trips
+            self?.trips = Data.trips
         }
         self.present(controller, animated: true)
     }

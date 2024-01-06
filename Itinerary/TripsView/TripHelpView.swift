@@ -28,7 +28,7 @@ final class TripHelpView: UIView {
         stackView.axis = .vertical
         stackView.spacing = 20
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor),
+            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 100),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
