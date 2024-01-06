@@ -96,7 +96,7 @@ final class AddTripViewController: UIViewController {
         }
         if let trip {
             tripTextField.text = trip.title
-            cardView.image = trip.image
+            cardView.configure(with: trip.image)
             titleLabel.text = "Edit Trip"
         }
     }
@@ -148,7 +148,7 @@ extension AddTripViewController: PHPickerViewControllerDelegate {
                 return
             }
             DispatchQueue.main.async {
-                self.cardView.image = image
+                self.cardView.configure(with: image)
             }
         }
     }

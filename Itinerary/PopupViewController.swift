@@ -3,7 +3,7 @@ import UIKit
 class PopupViewController: UIViewController {
     var doneSaving: (() -> ())?
 
-    let cardView = PopView()
+    let cardView = PopupView()
 
     let cancelButton: TripButton = {
         $0.setTitle("Cancel", for: [])

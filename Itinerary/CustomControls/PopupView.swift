@@ -1,9 +1,20 @@
 import UIKit
 
-final class PopupView: UIImageView {
+final class PopupView: UIView {
+    var image: UIImage? {
+        imageView.image
+    }
+    
+    private var imageView: UIImageView = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.contentMode = .scaleAspectFill
+        return $0
+    }(UIImageView())
+
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         setupView()
+        setupConstraints()
     }
 
     required init?(coder: NSCoder) {
@@ -11,6 +22,7 @@ final class PopupView: UIImageView {
     }
 
     private func setupView() {
+        addSubview(imageView)
         layer.cornerRadius = 10
         layer.shadowOpacity = 1
         layer.shadowOffset = .zero
@@ -20,25 +32,18 @@ final class PopupView: UIImageView {
         contentMode = .scaleAspectFill
         translatesAutoresizingMaskIntoConstraints = false
     }
-}
 
-final class PopView: UIView {
-    override init(frame: CGRect = .zero) {
-        super.init(frame: frame)
-        setupView()
+    func configure(with image: UIImage?) {
+        imageView.image = image
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private func setupView() {
-        layer.cornerRadius = 10
-        layer.shadowOpacity = 1
-        layer.shadowOffset = .zero
-        layer.shadowColor = UIColor.darkGray.cgColor
-        layer.masksToBounds = true
-        backgroundColor = Theme.background
-        translatesAutoresizingMaskIntoConstraints = false
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
     }
 }
+
