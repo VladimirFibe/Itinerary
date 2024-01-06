@@ -19,5 +19,8 @@ struct TripModel: Hashable {
         }
     }
     static func == (lhs: TripModel, rhs: TripModel) -> Bool { lhs.id == rhs.id }
-    func hash(into hasher: inout Hasher) { hasher.combine(id) }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(title)
+    }
 }

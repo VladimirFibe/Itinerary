@@ -42,7 +42,7 @@ final class PopupView: UIView {
             imageView.topAnchor.constraint(equalTo: topAnchor),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            imageView.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
 }

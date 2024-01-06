@@ -59,7 +59,6 @@ final class TripsViewController: UIViewController {
 
     @objc private func addButtonHandle() {
         updateTrip()
-//        presentPopupViewController()
     }
 
     @objc private func closeHelpView() {

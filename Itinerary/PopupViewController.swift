@@ -5,6 +5,23 @@ class PopupViewController: UIViewController {
 
     let cardView = PopupView()
 
+    let titleLabel: UILabel = {
+        $0.layer.shadowOpacity = 1
+        $0.layer.shadowColor = UIColor.white.cgColor
+        $0.layer.shadowOffset = .zero
+        $0.layer.shadowRadius = 5
+        $0.text = "Add Trip"
+        $0.font = UIFont(name: Theme.mainFontName, size: 24)
+        $0.textColor = Theme.accent
+        return $0
+    }(UILabel())
+
+    let titleTextField: UITextField = {
+        $0.placeholder = "Trip name"
+        $0.borderStyle = .roundedRect
+        return $0
+    }(UITextField())
+
     let cancelButton: TripButton = {
         $0.setTitle("Cancel", for: [])
         return $0
@@ -17,6 +34,18 @@ class PopupViewController: UIViewController {
 
     let rootStackView: UIStackView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.axis = .vertical
+        $0.spacing = 20
+        return $0
+    }(UIStackView())
+
+    let titleStackView: UIStackView = {
+        $0.distribution = .equalSpacing
+        return $0
+    }(UIStackView())
+
+    let bodyStackView: UIStackView = {
+        $0.axis = .vertical
         return $0
     }(UIStackView())
 
@@ -37,9 +66,14 @@ class PopupViewController: UIViewController {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         view.addSubview(cardView)
         cardView.addSubview(rootStackView)
+        rootStackView.addArrangedSubview(titleStackView)
+        rootStackView.addArrangedSubview(bodyStackView)
         rootStackView.addArrangedSubview(buttonsStackView)
+        titleStackView.addArrangedSubview(titleLabel)
+        bodyStackView.addArrangedSubview(titleTextField)
         buttonsStackView.addArrangedSubview(cancelButton)
         buttonsStackView.addArrangedSubview(saveButton)
+        cancelButton.addTarget(self, action: #selector(cancel), for: .primaryActionTriggered)
         saveButton.addTarget(self, action: #selector(save), for: .primaryActionTriggered)
     }
 
@@ -56,6 +90,10 @@ class PopupViewController: UIViewController {
             rootStackView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -padding),
             rootStackView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -padding)
         ])
+    }
+
+    func cancel() {
+        dismiss(animated: true)
     }
 
     func save() {
