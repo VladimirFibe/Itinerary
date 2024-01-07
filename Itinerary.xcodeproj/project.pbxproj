@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		020564EF2B4A9E60001469DE /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020564EE2B4A9E60001469DE /* UITextField+Extension.swift */; };
+		020564F32B4AAC7D001469DE /* DayFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020564F22B4AAC7D001469DE /* DayFunctions.swift */; };
 		021B8FB52B47E180000856E4 /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021B8FB42B47E180000856E4 /* UITableViewCell+Extension.swift */; };
 		021B8FB72B47E1ED000856E4 /* UITableViewHeaderFooterView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021B8FB62B47E1ED000856E4 /* UITableViewHeaderFooterView+Extension.swift */; };
 		024F20D82B450FC300B926C7 /* AddTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F20D72B450FC300B926C7 /* AddTripViewController.swift */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		020564EE2B4A9E60001469DE /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		020564F22B4AAC7D001469DE /* DayFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFunctions.swift; sourceTree = "<group>"; };
 		021B8FB42B47E180000856E4 /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
 		021B8FB62B47E1ED000856E4 /* UITableViewHeaderFooterView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewHeaderFooterView+Extension.swift"; sourceTree = "<group>"; };
 		024F20D72B450FC300B926C7 /* AddTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		020564F02B4AAC50001469DE /* Trip */ = {
+			isa = PBXGroup;
+			children = (
+				02C33E2B2B43E08B00D21A59 /* TripModel.swift */,
+				02C33E2D2B43E09900D21A59 /* TripFunctions.swift */,
+			);
+			path = Trip;
+			sourceTree = "<group>";
+		};
+		020564F12B4AAC5B001469DE /* Day */ = {
+			isa = PBXGroup;
+			children = (
+				02768FE52B46DBD700FC7154 /* DayModel.swift */,
+				020564F22B4AAC7D001469DE /* DayFunctions.swift */,
+			);
+			path = Day;
+			sourceTree = "<group>";
+		};
 		024F20DB2B451FE500B926C7 /* CustomControls */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,10 +158,9 @@
 		02C33E312B43E41400D21A59 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				02C33E2B2B43E08B00D21A59 /* TripModel.swift */,
+				020564F02B4AAC50001469DE /* Trip */,
 				02B659182B45CF99007FEF93 /* Data.swift */,
-				02C33E2D2B43E09900D21A59 /* TripFunctions.swift */,
-				02768FE52B46DBD700FC7154 /* DayModel.swift */,
+				020564F12B4AAC5B001469DE /* Day */,
 				02768FE72B46DD7500FC7154 /* ActivityModel.swift */,
 				02768FE92B46DDA000FC7154 /* ActivityType.swift */,
 			);
@@ -284,6 +303,7 @@
 				028088542B47962D008CFE86 /* ActivityHeader.swift in Sources */,
 				021B8FB72B47E1ED000856E4 /* UITableViewHeaderFooterView+Extension.swift in Sources */,
 				0297E0C62B48FD7A009E039B /* PopupViewController.swift in Sources */,
+				020564F32B4AAC7D001469DE /* DayFunctions.swift in Sources */,
 				02C33E2E2B43E09900D21A59 /* TripFunctions.swift in Sources */,
 				021B8FB52B47E180000856E4 /* UITableViewCell+Extension.swift in Sources */,
 				024F20D82B450FC300B926C7 /* AddTripViewController.swift in Sources */,

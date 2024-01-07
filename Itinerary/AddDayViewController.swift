@@ -1,6 +1,8 @@
 import UIKit
 
 final class AddDayViewController: PopupViewController {
+    var getDay: ((DayModel) -> ())?
+    var tripId: UUID?
     let subTitleTextField: UITextField = {
         $0.placeholder = "Description (optional)"
         $0.borderStyle = .roundedRect
@@ -10,12 +12,15 @@ final class AddDayViewController: PopupViewController {
 }
 // MARK: - Actions
 extension AddDayViewController {
-    
     override func save() {
-        guard titleTextField.hasValue else { return }
-        print(titleTextField.text ?? "")
-        print(subTitleTextField.text ?? "")
-        super.save()
+        guard titleTextField.hasValue,
+        let title = titleTextField.text,
+        let tripId else { return }
+        let subtitle = subTitleTextField.text ?? ""
+        let day = DayModel(title: title, subtitle: subtitle, data: nil)
+        DayFunctions.createDays(at: tripId, using: day)
+        getDay?(day)
+        dismiss(animated: true)
     }
 }
 // MARK: - Setup Views
