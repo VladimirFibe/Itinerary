@@ -2,9 +2,7 @@ import UIKit
 
 final class ActivitiesViewController: UIViewController {
     var tripId: UUID
-    var days: [DayModel] = [] {
-        didSet { tableView.reloadData()}
-    }
+    var days: [DayModel] = []
 
     private let addButton: UIButton = {
         $0.setImage(Theme.actionButtonImage, for: [])
@@ -21,6 +19,8 @@ final class ActivitiesViewController: UIViewController {
     private let tableView: UITableView = {
         $0.backgroundColor = .clear
         $0.separatorStyle = .none
+        let footer = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 70))
+        $0.tableFooterView = footer
         $0.register(
             ActivityHeader.self,
             forHeaderFooterViewReuseIdentifier: ActivityHeader.identifier
@@ -45,10 +45,15 @@ final class ActivitiesViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupConstraints()
+        getDays()
+    }
+
+    func getDays() {
         TripFunctions.readTrip(id: tripId) {[weak self] trip in
             guard let self, let trip else { return }
             self.backgroundImageView.image = trip.image
             self.days = trip.days
+            self.tableView.reloadData()
         }
     }
 
@@ -100,11 +105,27 @@ final class ActivitiesViewController: UIViewController {
     }
 
     private func handleAddDay(action: UIAlertAction) {
-        print("add day")
+        let controller = AddDayViewController()
+        controller.modalPresentationStyle = .overCurrentContext
+        controller.modalTransitionStyle = .crossDissolve
+        controller.tripId = tripId
+        controller.getDay = {[weak self] day in
+            guard let self else { return }
+            let indexSet = IndexSet([self.days.count])
+            self.days.append(day)
+            self.tableView.insertSections(indexSet, with: .automatic)
+        }
+        self.present(controller, animated: true)
     }
 
     private func handleAddActivity(action: UIAlertAction) {
-        print(#function)
+        let controller = AddDayViewController()
+        controller.modalPresentationStyle = .overCurrentContext
+        controller.modalTransitionStyle = .crossDissolve
+        controller.doneSaving = {
+            print("Save activity")
+        }
+        self.present(controller, animated: true)
     }
 
     private func setupConstraints() {

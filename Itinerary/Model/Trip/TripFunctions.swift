@@ -27,7 +27,6 @@ class TripFunctions {
     static func update(_ trip: TripModel) {
         guard let index = Data.trips.firstIndex(where: { $0.id == trip.id}) else { return }
         Data.trips[index] = trip
-        print(Data.trips)
     }
 
     static func delete(_ trip: TripModel) {
