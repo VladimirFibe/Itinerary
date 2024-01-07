@@ -8,16 +8,13 @@ final class AddDayViewController: PopupViewController {
         $0.borderStyle = .roundedRect
         return $0
     }(UITextField())
-
 }
 // MARK: - Actions
 extension AddDayViewController {
     override func save() {
-        guard titleTextField.hasValue,
-        let title = titleTextField.text,
-        let tripId else { return }
+        guard let tripId else { return }
         let subtitle = subTitleTextField.text ?? ""
-        let day = DayModel(title: title, subtitle: subtitle, data: nil)
+        let day = DayModel(title: Date(), subtitle: subtitle, data: nil)
         DayFunctions.createDays(at: tripId, using: day)
         getDay?(day)
         dismiss(animated: true)
@@ -29,6 +26,5 @@ extension AddDayViewController {
         super.setupViews()
         bodyStackView.addArrangedSubview(subTitleTextField)
         titleLabel.text = "Add day"
-        titleTextField.placeholder = "Title or date"
     }
 }

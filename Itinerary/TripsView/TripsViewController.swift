@@ -47,19 +47,8 @@ final class TripsViewController: UIViewController {
         }
     }
 
-    private func presentPopupViewController() {
-        let controller = AddDayViewController()
-        controller.modalPresentationStyle = .overCurrentContext
-        controller.modalTransitionStyle = .crossDissolve
-        controller.doneSaving = {
-            print("Save")
-        }
-        self.present(controller, animated: true)
-    }
-
     @objc private func addButtonHandle() {
-//        updateTrip()
-        presentPopupViewController()
+        updateTrip()
     }
 
     @objc private func closeHelpView() {

@@ -12,14 +12,6 @@ class PopupViewController: UIViewController {
         return $0
     }(UILabel())
 
-    let titleTextField: UITextField = {
-        $0.placeholder = "Trip name"
-
-        $0.autocapitalizationType = .words
-        $0.borderStyle = .roundedRect
-        return $0
-    }(UITextField())
-
     let cancelButton: TripButton = {
         $0.setTitle("Cancel", for: [])
         return $0
@@ -69,7 +61,6 @@ class PopupViewController: UIViewController {
         rootStackView.addArrangedSubview(bodyStackView)
         rootStackView.addArrangedSubview(buttonsStackView)
         titleStackView.addArrangedSubview(titleLabel)
-        bodyStackView.addArrangedSubview(titleTextField)
         buttonsStackView.addArrangedSubview(cancelButton)
         buttonsStackView.addArrangedSubview(saveButton)
         cancelButton.addTarget(self, action: #selector(cancel), for: .primaryActionTriggered)

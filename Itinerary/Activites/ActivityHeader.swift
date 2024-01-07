@@ -25,7 +25,9 @@ final class ActivityHeader: UITableViewHeaderFooterView {
     }
 
     func configure(with day: DayModel) {
-        titleLabel.text = day.title
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        titleLabel.text = formatter.string(from: day.title)
         subTitleLabel.text = day.subtitle
     }
     

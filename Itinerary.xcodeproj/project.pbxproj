@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		020564EF2B4A9E60001469DE /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020564EE2B4A9E60001469DE /* UITextField+Extension.swift */; };
 		020564F32B4AAC7D001469DE /* DayFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020564F22B4AAC7D001469DE /* DayFunctions.swift */; };
+		020564F52B4B1641001469DE /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020564F42B4B1641001469DE /* Date+Extension.swift */; };
 		021B8FB52B47E180000856E4 /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021B8FB42B47E180000856E4 /* UITableViewCell+Extension.swift */; };
 		021B8FB72B47E1ED000856E4 /* UITableViewHeaderFooterView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021B8FB62B47E1ED000856E4 /* UITableViewHeaderFooterView+Extension.swift */; };
 		024F20D82B450FC300B926C7 /* AddTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F20D72B450FC300B926C7 /* AddTripViewController.swift */; };
@@ -41,6 +42,7 @@
 /* Begin PBXFileReference section */
 		020564EE2B4A9E60001469DE /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		020564F22B4AAC7D001469DE /* DayFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayFunctions.swift; sourceTree = "<group>"; };
+		020564F42B4B1641001469DE /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		021B8FB42B47E180000856E4 /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
 		021B8FB62B47E1ED000856E4 /* UITableViewHeaderFooterView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewHeaderFooterView+Extension.swift"; sourceTree = "<group>"; };
 		024F20D72B450FC300B926C7 /* AddTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripViewController.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				02C33E432B44730100D21A59 /* UIButton+Extension.swift */,
 				021B8FB42B47E180000856E4 /* UITableViewCell+Extension.swift */,
 				021B8FB62B47E1ED000856E4 /* UITableViewHeaderFooterView+Extension.swift */,
+				020564F42B4B1641001469DE /* Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				0297E0C62B48FD7A009E039B /* PopupViewController.swift in Sources */,
 				020564F32B4AAC7D001469DE /* DayFunctions.swift in Sources */,
 				02C33E2E2B43E09900D21A59 /* TripFunctions.swift in Sources */,
+				020564F52B4B1641001469DE /* Date+Extension.swift in Sources */,
 				021B8FB52B47E180000856E4 /* UITableViewCell+Extension.swift in Sources */,
 				024F20D82B450FC300B926C7 /* AddTripViewController.swift in Sources */,
 				02768FEA2B46DDA000FC7154 /* ActivityType.swift in Sources */,

@@ -10,6 +10,14 @@ final class AddTripViewController: PopupViewController {
         return $0
     }(UIButton(type: .system))
 
+    let titleTextField: UITextField = {
+        $0.placeholder = "Trip name"
+
+        $0.autocapitalizationType = .words
+        $0.borderStyle = .roundedRect
+        return $0
+    }(UITextField())
+
     @objc private func addPhoto() {
         presentPhotoPicker()
     }
@@ -35,6 +43,7 @@ extension AddTripViewController {
     override func setupViews() {
         super.setupViews()
         titleStackView.addArrangedSubview(photoButton)
+        bodyStackView.addArrangedSubview(titleTextField)
         titleLabel.layer.shadowOpacity = 1
         titleLabel.layer.shadowColor = UIColor.white.cgColor
         titleLabel.layer.shadowOffset = .zero
