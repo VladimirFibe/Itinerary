@@ -45,6 +45,7 @@ class PopupViewController: UIViewController {
     }(UIStackView())
 
     let bodyStackView: UIStackView = {
+        $0.spacing = 10
         $0.axis = .vertical
         return $0
     }(UIStackView())
@@ -97,6 +98,7 @@ class PopupViewController: UIViewController {
     }
 
     func save() {
+        doneSaving?()
         dismiss(animated: true)
     }
 }

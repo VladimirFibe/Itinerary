@@ -100,11 +100,23 @@ final class ActivitiesViewController: UIViewController {
     }
 
     private func handleAddDay(action: UIAlertAction) {
-        print("add day")
+        let controller = AddDayViewController()
+        controller.modalPresentationStyle = .overCurrentContext
+        controller.modalTransitionStyle = .crossDissolve
+        controller.doneSaving = {
+            print("Save day")
+        }
+        self.present(controller, animated: true)
     }
 
     private func handleAddActivity(action: UIAlertAction) {
-        print(#function)
+        let controller = AddDayViewController()
+        controller.modalPresentationStyle = .overCurrentContext
+        controller.modalTransitionStyle = .crossDissolve
+        controller.doneSaving = {
+            print("Save activity")
+        }
+        self.present(controller, animated: true)
     }
 
     private func setupConstraints() {
