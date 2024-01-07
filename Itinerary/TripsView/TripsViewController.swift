@@ -135,7 +135,7 @@ final class TripsViewController: UIViewController {
 // MARK: - UITableViewDelegate
 extension TripsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = ActivitiesViewController(tripId: trips[indexPath.row].id)
+        let controller = ActivitiesViewController(trip: trips[indexPath.row])
         controller.navigationItem.title = trips[indexPath.row].title
         navigationController?.pushViewController(controller, animated: true)
     }

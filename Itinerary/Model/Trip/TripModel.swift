@@ -4,8 +4,12 @@ struct TripModel: Hashable {
     let id: UUID
     var title: String
     var image: UIImage?
-    var days: [DayModel] = []
-    
+    var days: [DayModel] = [] {
+        didSet {
+            days = days.sorted(by: < )
+        }
+    }
+
     init(
         title: String,
         image: UIImage? = nil,
