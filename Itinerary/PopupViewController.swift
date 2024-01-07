@@ -6,10 +6,6 @@ class PopupViewController: UIViewController {
     let cardView = PopupView()
 
     let titleLabel: UILabel = {
-        $0.layer.shadowOpacity = 1
-        $0.layer.shadowColor = UIColor.white.cgColor
-        $0.layer.shadowOffset = .zero
-        $0.layer.shadowRadius = 5
         $0.text = "Add Trip"
         $0.font = UIFont(name: Theme.mainFontName, size: 24)
         $0.textColor = Theme.accent
@@ -18,6 +14,8 @@ class PopupViewController: UIViewController {
 
     let titleTextField: UITextField = {
         $0.placeholder = "Trip name"
+
+        $0.autocapitalizationType = .words
         $0.borderStyle = .roundedRect
         return $0
     }(UITextField())

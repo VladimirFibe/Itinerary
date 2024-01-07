@@ -12,9 +12,10 @@ final class AddDayViewController: PopupViewController {
 extension AddDayViewController {
     
     override func save() {
-        super.save()
+        guard titleTextField.hasValue else { return }
         print(titleTextField.text ?? "")
         print(subTitleTextField.text ?? "")
+        super.save()
     }
 }
 // MARK: - Setup Views

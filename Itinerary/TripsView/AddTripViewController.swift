@@ -16,17 +16,9 @@ final class AddTripViewController: PopupViewController {
 
     override func save() {
         titleTextField.rightViewMode = .never
-        guard let title = titleTextField.text, !title.isEmpty else {
-            let imageView = UIImageView(image: UIImage(systemName: "exclamationmark.triangle.fill"))
-            imageView.tintColor = .red
-            imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
-            imageView.contentMode = .scaleAspectFit
-            titleTextField.rightView =  imageView
-            titleTextField.rightViewMode = .always
-            titleTextField.layer.borderColor = UIColor.red.cgColor
-            titleTextField.layer.borderWidth = 1
-            return
-        }
+        guard titleTextField.hasValue,
+        let title = titleTextField.text
+        else { return }
         if var trip {
             trip.image = cardView.image
             trip.title = title
@@ -43,6 +35,11 @@ extension AddTripViewController {
     override func setupViews() {
         super.setupViews()
         titleStackView.addArrangedSubview(photoButton)
+        titleLabel.layer.shadowOpacity = 1
+        titleLabel.layer.shadowColor = UIColor.white.cgColor
+        titleLabel.layer.shadowOffset = .zero
+        titleLabel.layer.shadowRadius = 5
+
         photoButton.addTarget(self, action: #selector(addPhoto), for: .primaryActionTriggered)
         if let trip {
             titleTextField.text = trip.title
