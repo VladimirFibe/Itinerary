@@ -2,6 +2,9 @@ import UIKit
 
 final class AddActivityViewController: PopupViewController {
     var trip: TripModel
+    var selected = 0 {
+        didSet { setupSelectedActivity()}
+    }
     init(trip: TripModel) {
         self.trip = trip
         super.init(nibName: nil, bundle: nil)
@@ -24,17 +27,37 @@ final class AddActivityViewController: PopupViewController {
         $0.placeholder = "Description (optional)"
         return $0
     }(UITextField())
+
+    let activitiesStackView: UIStackView = {
+        $0.distribution = .equalSpacing
+        return $0
+    }(UIStackView())
 }
 // MARK: - Setup Views
 extension AddActivityViewController {
     override func setupViews() {
         super.setupViews()
         bodyStackView.addArrangedSubview(daysPickerView)
+        bodyStackView.addArrangedSubview(activitiesStackView)
         bodyStackView.addArrangedSubview(titleTextField)
         bodyStackView.addArrangedSubview(subTitleTextField)
         titleLabel.text = "Add Activity"
         daysPickerView.dataSource = self
         daysPickerView.delegate = self
+        setupActivitiesPicker()
+        selected = 1
+    }
+
+    private func setupActivitiesPicker() {
+        ActivityType.allCases.forEach {
+            let button = UIButton(type: .system)
+            button.setImage($0.image, for: [])
+            activitiesStackView.addArrangedSubview(button)
+        }
+    }
+
+    private func setupSelectedActivity() {
+        
     }
 }
 // MARK: - UIPickerViewDataSource

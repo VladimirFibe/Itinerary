@@ -1,6 +1,6 @@
 import UIKit
 
-enum ActivityType {
+enum ActivityType: CaseIterable {
     case car
     case excursion
     case flight
