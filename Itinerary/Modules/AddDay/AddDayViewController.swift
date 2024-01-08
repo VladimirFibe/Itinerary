@@ -17,6 +17,7 @@ final class AddDayViewController: PopupViewController {
         $0.preferredDatePickerStyle = .wheels
         return $0
     }(UIDatePicker())
+    
     let subTitleTextField: UITextField = {
         $0.placeholder = "Description (optional)"
         $0.borderStyle = .roundedRect

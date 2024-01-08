@@ -114,7 +114,7 @@ final class ActivitiesViewController: UIViewController {
     }
 
     private func handleAddActivity(action: UIAlertAction) {
-        let controller = AddDayViewController(trip: trip)
+        let controller = AddActivityViewController()
         controller.modalPresentationStyle = .overCurrentContext
         controller.modalTransitionStyle = .crossDissolve
         controller.doneSaving = {

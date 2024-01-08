@@ -71,7 +71,7 @@ class PopupViewController: UIViewController {
         let padding = 20.0
 
         NSLayoutConstraint.activate([
-            cardView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
+            cardView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             cardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             cardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
 
