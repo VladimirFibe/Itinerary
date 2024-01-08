@@ -86,6 +86,7 @@ final class ActivitiesViewController: UIViewController {
             title: "Cancel",
             style: .cancel
         )
+        activityAction.isEnabled = !trip.days.isEmpty
         alert.addAction(dayAction)
         alert.addAction(activityAction)
         alert.addAction(cancelAction)
@@ -114,7 +115,7 @@ final class ActivitiesViewController: UIViewController {
     }
 
     private func handleAddActivity(action: UIAlertAction) {
-        let controller = AddActivityViewController()
+        let controller = AddActivityViewController(trip: trip)
         controller.modalPresentationStyle = .overCurrentContext
         controller.modalTransitionStyle = .crossDissolve
         controller.doneSaving = {
