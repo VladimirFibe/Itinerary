@@ -12,14 +12,6 @@ class PopupViewController: UIViewController {
         return $0
     }(UILabel())
 
-    let titleTextField: UITextField = {
-        $0.placeholder = "Trip name"
-
-        $0.autocapitalizationType = .words
-        $0.borderStyle = .roundedRect
-        return $0
-    }(UITextField())
-
     let cancelButton: TripButton = {
         $0.setTitle("Cancel", for: [])
         return $0
@@ -69,7 +61,6 @@ class PopupViewController: UIViewController {
         rootStackView.addArrangedSubview(bodyStackView)
         rootStackView.addArrangedSubview(buttonsStackView)
         titleStackView.addArrangedSubview(titleLabel)
-        bodyStackView.addArrangedSubview(titleTextField)
         buttonsStackView.addArrangedSubview(cancelButton)
         buttonsStackView.addArrangedSubview(saveButton)
         cancelButton.addTarget(self, action: #selector(cancel), for: .primaryActionTriggered)
@@ -80,7 +71,7 @@ class PopupViewController: UIViewController {
         let padding = 20.0
 
         NSLayoutConstraint.activate([
-            cardView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            cardView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
             cardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             cardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
 

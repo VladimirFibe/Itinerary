@@ -47,19 +47,8 @@ final class TripsViewController: UIViewController {
         }
     }
 
-    private func presentPopupViewController() {
-        let controller = AddDayViewController()
-        controller.modalPresentationStyle = .overCurrentContext
-        controller.modalTransitionStyle = .crossDissolve
-        controller.doneSaving = {
-            print("Save")
-        }
-        self.present(controller, animated: true)
-    }
-
     @objc private func addButtonHandle() {
-//        updateTrip()
-        presentPopupViewController()
+        updateTrip()
     }
 
     @objc private func closeHelpView() {
@@ -146,7 +135,7 @@ final class TripsViewController: UIViewController {
 // MARK: - UITableViewDelegate
 extension TripsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = ActivitiesViewController(tripId: trips[indexPath.row].id)
+        let controller = ActivitiesViewController(trip: trips[indexPath.row])
         controller.navigationItem.title = trips[indexPath.row].title
         navigationController?.pushViewController(controller, animated: true)
     }

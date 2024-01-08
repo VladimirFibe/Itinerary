@@ -25,7 +25,7 @@ final class ActivityHeader: UITableViewHeaderFooterView {
     }
 
     func configure(with day: DayModel) {
-        titleLabel.text = day.title
+        titleLabel.text = day.title.mediumDate
         subTitleLabel.text = day.subtitle
     }
     

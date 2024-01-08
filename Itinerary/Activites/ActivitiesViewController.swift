@@ -1,8 +1,7 @@
 import UIKit
 
 final class ActivitiesViewController: UIViewController {
-    var tripId: UUID
-    var days: [DayModel] = []
+    var trip: TripModel
 
     private let addButton: UIButton = {
         $0.setImage(Theme.actionButtonImage, for: [])
@@ -32,8 +31,8 @@ final class ActivitiesViewController: UIViewController {
         return $0
     }(UITableView())
 
-    init(tripId: UUID) {
-        self.tripId = tripId
+    init(trip: TripModel) {
+        self.trip = trip
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -49,12 +48,8 @@ final class ActivitiesViewController: UIViewController {
     }
 
     func getDays() {
-        TripFunctions.readTrip(id: tripId) {[weak self] trip in
-            guard let self, let trip else { return }
-            self.backgroundImageView.image = trip.image
-            self.days = trip.days
-            self.tableView.reloadData()
-        }
+        backgroundImageView.image = trip.image
+        tableView.reloadData()
     }
 
     private func setupView() {
@@ -105,21 +100,21 @@ final class ActivitiesViewController: UIViewController {
     }
 
     private func handleAddDay(action: UIAlertAction) {
-        let controller = AddDayViewController()
+        let controller = AddDayViewController(trip: trip)
         controller.modalPresentationStyle = .overCurrentContext
         controller.modalTransitionStyle = .crossDissolve
-        controller.tripId = tripId
         controller.getDay = {[weak self] day in
             guard let self else { return }
-            let indexSet = IndexSet([self.days.count])
-            self.days.append(day)
+            self.trip.days.append(day)
+            let index = self.trip.days.firstIndex(of: day) ?? 0
+            let indexSet = IndexSet([index])
             self.tableView.insertSections(indexSet, with: .automatic)
         }
         self.present(controller, animated: true)
     }
 
     private func handleAddActivity(action: UIAlertAction) {
-        let controller = AddDayViewController()
+        let controller = AddDayViewController(trip: trip)
         controller.modalPresentationStyle = .overCurrentContext
         controller.modalTransitionStyle = .crossDissolve
         controller.doneSaving = {
@@ -143,19 +138,18 @@ final class ActivitiesViewController: UIViewController {
             addButton.widthAnchor.constraint(equalToConstant: 56),
             addButton.heightAnchor.constraint(equalTo: addButton.widthAnchor),
             addButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-
+            addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
     }
 }
 
 extension ActivitiesViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        days.count
+        trip.days.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        days[section].activityModels.count
+        trip.days[section].activityModels.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -163,7 +157,7 @@ extension ActivitiesViewController: UITableViewDataSource {
             withIdentifier: ActivityCell.identifier,
             for: indexPath
         ) as? ActivityCell else { fatalError()}
-        cell.configure(with: days[indexPath.section].activityModels[indexPath.row])
+        cell.configure(with: trip.days[indexPath.section].activityModels[indexPath.row])
         return cell
     }
 }
@@ -171,7 +165,7 @@ extension ActivitiesViewController: UITableViewDataSource {
 extension ActivitiesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: ActivityHeader.identifier) as? ActivityHeader else { return nil }
-        header.configure(with: days[section])
+        header.configure(with: trip.days[section])
         return header
     }
 }
