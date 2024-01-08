@@ -100,10 +100,9 @@ final class ActivitiesViewController: UIViewController {
     }
 
     private func handleAddDay(action: UIAlertAction) {
-        let controller = AddDayViewController()
+        let controller = AddDayViewController(trip: trip)
         controller.modalPresentationStyle = .overCurrentContext
         controller.modalTransitionStyle = .crossDissolve
-        controller.tripId = trip.id
         controller.getDay = {[weak self] day in
             guard let self else { return }
             self.trip.days.append(day)
@@ -115,7 +114,7 @@ final class ActivitiesViewController: UIViewController {
     }
 
     private func handleAddActivity(action: UIAlertAction) {
-        let controller = AddDayViewController()
+        let controller = AddDayViewController(trip: trip)
         controller.modalPresentationStyle = .overCurrentContext
         controller.modalTransitionStyle = .crossDissolve
         controller.doneSaving = {
@@ -139,8 +138,7 @@ final class ActivitiesViewController: UIViewController {
             addButton.widthAnchor.constraint(equalToConstant: 56),
             addButton.heightAnchor.constraint(equalTo: addButton.widthAnchor),
             addButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-
+            addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
     }
 }

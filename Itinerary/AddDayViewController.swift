@@ -2,8 +2,16 @@ import UIKit
 
 final class AddDayViewController: PopupViewController {
     var getDay: ((DayModel) -> ())?
-    var tripId: UUID?
-
+    var trip: TripModel
+    init(trip: TripModel) {
+        self.trip = trip
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     let datePicker: UIDatePicker = {
         $0.datePickerMode = .date
         $0.preferredDatePickerStyle = .wheels
@@ -19,13 +27,28 @@ final class AddDayViewController: PopupViewController {
 // MARK: - Actions
 extension AddDayViewController {
     override func save() {
-        guard let tripId else { return }
+        if alreadyExists {
+            let alert = UIAlertController(
+                title: "Day Already Exists",
+                message: "Choose another date",
+                preferredStyle: .alert
+            )
+            let ok = UIAlertAction(title: "OK", style: .cancel)
+            alert.addAction(ok)
+            present(alert, animated: true)
+            return
+        }
         let subtitle = subTitleTextField.text ?? ""
         let title = datePicker.date
         let day = DayModel(title: title, subtitle: subtitle, data: nil)
-        DayFunctions.createDays(at: tripId, using: day)
+        DayFunctions.createDays(at: trip.id, using: day)
         getDay?(day)
         dismiss(animated: true)
+    }
+
+    var alreadyExists: Bool {
+        let date = datePicker.date
+        return trip.days.contains(where: {$0.title.mediumDate == date.mediumDate})
     }
 
     @objc func done(_ sender: UITextField) {
