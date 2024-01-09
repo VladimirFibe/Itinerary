@@ -2,7 +2,7 @@ import UIKit
 
 final class AddActivityViewController: PopupViewController {
     var trip: TripModel
-    var selected = 0 {
+    var selected = ActivityType.excursion {
         didSet { setupSelectedActivity()}
     }
     init(trip: TripModel) {
@@ -32,6 +32,8 @@ final class AddActivityViewController: PopupViewController {
         $0.distribution = .equalSpacing
         return $0
     }(UIStackView())
+
+    var buttons: [ActivityButton] = []
 }
 // MARK: - Setup Views
 extension AddActivityViewController {
@@ -45,19 +47,26 @@ extension AddActivityViewController {
         daysPickerView.dataSource = self
         daysPickerView.delegate = self
         setupActivitiesPicker()
-        selected = 1
+        setupSelectedActivity()
     }
 
     private func setupActivitiesPicker() {
         ActivityType.allCases.forEach {
-            let button = UIButton(type: .system)
-            button.setImage($0.image, for: [])
+            let button = ActivityButton(with: $0)
+            button.addTarget(self, action: #selector(buttonHandler), for: .primaryActionTriggered)
+            buttons.append(button)
             activitiesStackView.addArrangedSubview(button)
         }
     }
 
+    @objc private func buttonHandler(_ sender: ActivityButton) {
+        selected = sender.activity
+    }
+
     private func setupSelectedActivity() {
-        
+        buttons.forEach {
+            $0.tintColor = selected == $0.activity ? Theme.tint : Theme.accent
+        }
     }
 }
 // MARK: - UIPickerViewDataSource
