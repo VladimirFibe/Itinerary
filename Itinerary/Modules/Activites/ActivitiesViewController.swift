@@ -118,8 +118,12 @@ final class ActivitiesViewController: UIViewController {
         let controller = AddActivityViewController(trip: trip)
         controller.modalPresentationStyle = .overCurrentContext
         controller.modalTransitionStyle = .crossDissolve
-        controller.doneSaving = {
-            print("Save activity")
+        controller.getActivity = { [weak self] dayIndex, activity in
+            guard let self else { return }
+            let row = self.trip.days[dayIndex].activities.count
+            self.trip.days[dayIndex].activities.append(activity)
+            let indexPath = IndexPath(row: row, section: dayIndex)
+            self.tableView.insertRows(at: [indexPath], with: .automatic)
         }
         self.present(controller, animated: true)
     }
@@ -150,7 +154,7 @@ extension ActivitiesViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        trip.days[section].activityModels.count
+        trip.days[section].activities.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -158,7 +162,7 @@ extension ActivitiesViewController: UITableViewDataSource {
             withIdentifier: ActivityCell.identifier,
             for: indexPath
         ) as? ActivityCell else { fatalError()}
-        cell.configure(with: trip.days[indexPath.section].activityModels[indexPath.row])
+        cell.configure(with: trip.days[indexPath.section].activities[indexPath.row])
         return cell
     }
 }

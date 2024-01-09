@@ -3,6 +3,7 @@ import Photos
 import PhotosUI
 
 final class AddTripViewController: PopupViewController {
+    var doneSaving: (() -> ())?
     var trip: TripModel?
 
     private let photoButton: UIButton = {

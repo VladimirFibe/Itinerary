@@ -41,7 +41,7 @@ extension AddDayViewController {
         }
         let subtitle = subTitleTextField.text ?? ""
         let title = datePicker.date
-        let day = DayModel(title: title, subtitle: subtitle, data: nil)
+        let day = DayModel(title: title, subtitle: subtitle, activities: nil)
         DayFunctions.createDays(at: trip.id, using: day)
         getDay?(day)
         dismiss(animated: true)

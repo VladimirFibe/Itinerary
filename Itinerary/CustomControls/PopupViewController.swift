@@ -1,8 +1,6 @@
 import UIKit
 
 class PopupViewController: UIViewController {
-    var doneSaving: (() -> ())?
-
     let cardView = PopupView()
 
     let titleLabel: UILabel = {
@@ -86,8 +84,5 @@ class PopupViewController: UIViewController {
         dismiss(animated: true)
     }
 
-    func save() {
-        doneSaving?()
-        dismiss(animated: true)
-    }
+    func save() {}
 }

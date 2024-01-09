@@ -16,27 +16,27 @@ class Data {
         dayModels.append(DayModel(
             title: Date(),
             subtitle: "Departure",
-            data: createMockActivityModelData(sectionTitle: "April 18")
+            activities: createMockActivityModelData(sectionTitle: "April 18")
         ))
         dayModels.append(DayModel(
             title: today.add(days: 1),
             subtitle: "Exploring",
-            data: createMockActivityModelData(sectionTitle: "April 19")
+            activities: createMockActivityModelData(sectionTitle: "April 19")
         ))
         dayModels.append(DayModel(
             title: today.add(days: 2),
             subtitle: "Scuba Diving!",
-            data: createMockActivityModelData(sectionTitle: "April 20")
+            activities: createMockActivityModelData(sectionTitle: "April 20")
         ))
         dayModels.append(DayModel(
             title: today.add(days: 3),
             subtitle: "Volunteering",
-            data: createMockActivityModelData(sectionTitle: "April 21")
+            activities: createMockActivityModelData(sectionTitle: "April 21")
         ))
         dayModels.append(DayModel(
             title: today.add(days: 4),
             subtitle: "Time to go back home",
-            data: createMockActivityModelData(sectionTitle: "April 22")
+            activities: createMockActivityModelData(sectionTitle: "April 22")
         ))
         return dayModels
     }

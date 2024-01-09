@@ -1,6 +1,7 @@
 import UIKit
 
 final class AddActivityViewController: PopupViewController {
+    var getActivity: ((Int, ActivityModel) -> ())?
     var trip: TripModel
     var selected = ActivityType.excursion {
         didSet { setupSelectedActivity()}
@@ -34,6 +35,18 @@ final class AddActivityViewController: PopupViewController {
     }(UIStackView())
 
     var buttons: [ActivityButton] = []
+}
+// MARK: - Actions
+extension AddActivityViewController {
+    override func save() {
+        guard titleTextField.hasValue, let title = titleTextField.text else { return }
+        let dayIndex = daysPickerView.selectedRow(inComponent: 0)
+        let subTitle = subTitleTextField.text ?? ""
+        let activity = ActivityModel(title: title, subTitle: subTitle, activityType: selected)
+        ActivityFunctions.createActivity(at: trip, for: dayIndex, using: activity)
+        getActivity?(dayIndex, activity)
+        dismiss(animated: true)
+    }
 }
 // MARK: - Setup Views
 extension AddActivityViewController {
