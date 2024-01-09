@@ -142,9 +142,7 @@ extension TripsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "Delete") {
-            [weak self] action,
-            view,
-            actionPerformed in
+            [weak self] action, view, actionPerformed in
             guard let self else {
                 actionPerformed(false)
                 return

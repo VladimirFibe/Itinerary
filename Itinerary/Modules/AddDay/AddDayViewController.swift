@@ -17,6 +17,7 @@ final class AddDayViewController: PopupViewController {
         $0.preferredDatePickerStyle = .wheels
         return $0
     }(UIDatePicker())
+    
     let subTitleTextField: UITextField = {
         $0.placeholder = "Description (optional)"
         $0.borderStyle = .roundedRect
@@ -40,7 +41,7 @@ extension AddDayViewController {
         }
         let subtitle = subTitleTextField.text ?? ""
         let title = datePicker.date
-        let day = DayModel(title: title, subtitle: subtitle, data: nil)
+        let day = DayModel(title: title, subtitle: subtitle, activities: nil)
         DayFunctions.createDays(at: trip.id, using: day)
         getDay?(day)
         dismiss(animated: true)
